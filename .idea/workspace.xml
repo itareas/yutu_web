@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="yutu_cloud:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="895cdeff-21af-4537-82aa-44f90a70992b" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="D:/maven/apache-maven-3.6.2" />
+        <option name="userSettingsFile" value="D:\maven\apache-maven-3.6.2\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1UycW0JZGzHFCzMYhzuxLpP14e9" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\MyProject\IdeaProjects\yutu_cloud\src\main\resources\frame\数据库" />
+      <recent name="E:\MyProject\IdeaProjects\yutu_cloud\src\main\java\com\yutu\configuration" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.yutu.entity" />
+      <recent name="com.yutu.entity.api" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\MyProject\IdeaProjects\yutu_web\src\main\java\com\yutu\util" />
+      <recent name="E:\MyProject\IdeaProjects\yutu_cloud\src\main\resources\frame\架构图" />
+      <recent name="E:\MyProject\IdeaProjects\yutu_cloud\src\main\resources\frame\数据库" />
+      <recent name="E:\MyProject\IdeaProjects\yutu_cloud\src\main\resources" />
+      <recent name="E:\MyProject\IdeaProjects\yutu_cloud\src\main\java\com\yutu\webapi" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.YutuApplication">
+    <configuration name="RunClass" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.yutu.generator.RunClass" />
+      <module name="yutu_web" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.yutu.generator.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="MakeNoErrorCheck" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="yutu_cloud [install]" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="install" />
+                <option value="-Dmaven.test.skip=true" />
+              </list>
+            </option>
+            <option name="pomFileName" value="pom.xml" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration name="YutuApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="yutu_web" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.yutu.YutuApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="yutu_web" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.yutu.YutuApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.RunClass" />
+      <item itemvalue="Maven.yutu_cloud [install]" />
+      <item itemvalue="Spring Boot.YutuApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.RunClass" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="895cdeff-21af-4537-82aa-44f90a70992b" name="Default Changelist" comment="" />
+      <created>1576332303366</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1576332303366</updated>
+      <workItem from="1576332308254" duration="2019000" />
+      <workItem from="1576334363858" duration="2560000" />
+      <workItem from="1576374406192" duration="4335000" />
+      <workItem from="1576393707270" duration="4884000" />
+      <workItem from="1576402016544" duration="1721000" />
+      <workItem from="1576403756709" duration="7555000" />
+      <workItem from="1576417051757" duration="1708000" />
+      <workItem from="1576420792966" duration="6000" />
+      <workItem from="1576505459907" duration="2119000" />
+      <workItem from="1576551030219" duration="734000" />
+      <workItem from="1576678100157" duration="3980000" />
+      <workItem from="1576848933314" duration="5760000" />
+      <workItem from="1576976424753" duration="10220000" />
+      <workItem from="1576986669695" duration="1048000" />
+      <workItem from="1576992405665" duration="305000" />
+      <workItem from="1576992824978" duration="931000" />
+      <workItem from="1576993993024" duration="9017000" />
+    </task>
+    <task id="LOCAL-00001" summary="1.重新生成实体类和mapper&#10;2.上传数据库和相关资料">
+      <created>1576507501385</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1576507501385</updated>
+    </task>
+    <task id="LOCAL-00002" summary="1.重新生成实体类和mapper上传">
+      <created>1576551105707</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1576551105707</updated>
+    </task>
+    <task id="LOCAL-00003" summary="1.Redis实现单点登录完成&#10;2.调整配置文件，规划位置&#10;3.删除FilterConfig配置文件">
+      <created>1576682033306</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1576682033306</updated>
+    </task>
+    <task id="LOCAL-00004" summary="1.调整部份错误&#10;2.首页菜单功能开发">
+      <created>1576854644055</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1576854644055</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="1.重新生成实体类和mapper&#10;2.上传数据库和相关资料" />
+    <MESSAGE value="1.重新生成实体类和mapper上传" />
+    <MESSAGE value="1.Redis实现单点登录完成&#10;2.调整配置文件，规划位置&#10;3.删除FilterConfig配置文件" />
+    <MESSAGE value="1.调整部份错误&#10;2.首页菜单功能开发" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.调整部份错误&#10;2.首页菜单功能开发" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="361" y="74" key="#Notifications" timestamp="1576408434384">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="74" key="#Notifications/0.0.1536.824@0.0.1536.824" timestamp="1576408434384" />
+    <state x="223" y="70" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1576404221338">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="223" y="70" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1576404221338" />
+    <state x="574" y="105" key="#com.intellij.ide.util.MemberChooser" timestamp="1576995045722">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="574" y="105" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1576995045722" />
+    <state x="498" y="201" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1576993604903">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="498" y="201" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1536.824@0.0.1536.824" timestamp="1576993604903" />
+    <state x="588" y="277" key="#com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodDialog" timestamp="1576409044883">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="588" y="277" key="#com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodDialog/0.0.1536.824@0.0.1536.824" timestamp="1576409044883" />
+    <state x="216" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1576853297142">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="216" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1576853297142" />
+    <state x="499" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1577003222713">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="499" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1577003222713" />
+    <state x="369" y="30" key="#yutu_cloud_[install]" timestamp="1576987179021">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="369" y="30" key="#yutu_cloud_[install]/0.0.1536.824@0.0.1536.824" timestamp="1576987179021" />
+    <state x="369" y="30" key="#yutu_cloud_[install]_(1)" timestamp="1576987221383">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="369" y="30" key="#yutu_cloud_[install]_(1)/0.0.1536.824@0.0.1536.824" timestamp="1576987221383" />
+    <state x="356" y="1" key="CommitChangelistDialog2" timestamp="1576993906025">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="356" y="1" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1576993906025" />
+    <state width="451" height="466" key="DebuggerActiveHint" timestamp="1577007250459">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="451" height="466" key="DebuggerActiveHint/0.0.1536.824@0.0.1536.824" timestamp="1577007250459" />
+    <state x="549" y="113" key="FileChooserDialogImpl" timestamp="1577009245431">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="113" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1577009245431" />
+    <state x="593" y="326" width="373" height="171" key="Github.CreateGistDialog" timestamp="1577008694010">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="593" y="326" width="373" height="171" key="Github.CreateGistDialog/0.0.1536.824@0.0.1536.824" timestamp="1577008694010" />
+    <state width="1405" height="257" key="GridCell.Tab.0.bottom" timestamp="1577008515983">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1405" height="257" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1577008515983" />
+    <state width="1405" height="257" key="GridCell.Tab.0.center" timestamp="1577008515983">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1405" height="257" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1577008515983" />
+    <state width="1405" height="257" key="GridCell.Tab.0.left" timestamp="1577008515983">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1405" height="257" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1577008515983" />
+    <state width="1405" height="257" key="GridCell.Tab.0.right" timestamp="1577008515983">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1405" height="257" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1577008515983" />
+    <state width="1405" height="257" key="GridCell.Tab.1.bottom" timestamp="1577008515983">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1405" height="257" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1577008515983" />
+    <state width="1405" height="257" key="GridCell.Tab.1.center" timestamp="1577008515983">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1405" height="257" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1577008515983" />
+    <state width="1405" height="257" key="GridCell.Tab.1.left" timestamp="1577008515983">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1405" height="257" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1577008515983" />
+    <state width="1405" height="257" key="GridCell.Tab.1.right" timestamp="1577008515983">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1405" height="257" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1577008515983" />
+    <state width="1405" height="257" key="GridCell.Tab.2.bottom" timestamp="1577008515984">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1405" height="257" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1577008515984" />
+    <state width="1405" height="257" key="GridCell.Tab.2.center" timestamp="1577008515984">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1405" height="257" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1577008515984" />
+    <state width="1405" height="257" key="GridCell.Tab.2.left" timestamp="1577008515983">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1405" height="257" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1577008515983" />
+    <state width="1405" height="257" key="GridCell.Tab.2.right" timestamp="1577008515984">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1405" height="257" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1577008515984" />
+    <state x="420" y="143" key="NewModule_or_Project.wizard" timestamp="1577009114745">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="420" y="143" key="NewModule_or_Project.wizard/0.0.1536.824@0.0.1536.824" timestamp="1577009114745" />
+    <state x="270" y="125" key="RollbackChangesDialog" timestamp="1576854570097">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="270" y="125" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1576854570097" />
+    <state x="120" y="39" width="1170" height="709" key="SettingsEditor" timestamp="1576993828942">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="120" y="39" width="1170" height="709" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1576993828942" />
+    <state x="358" y="151" key="Vcs.Push.Dialog.v2" timestamp="1576993916280">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="358" y="151" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1576993916280" />
+    <state x="481" y="214" key="git4idea.merge.GitPullDialog" timestamp="1576976529868">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="481" y="214" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1576976529868" />
+    <state x="98" y="151" width="672" height="678" key="search.everywhere.popup" timestamp="1577004441496">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="98" y="151" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1577004441496" />
+  </component>
+</project>
