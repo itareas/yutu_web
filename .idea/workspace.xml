@@ -6,7 +6,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="895cdeff-21af-4537-82aa-44f90a70992b" name="Default Changelist" comment="" />
+    <list default="true" id="895cdeff-21af-4537-82aa-44f90a70992b" name="Default Changelist" comment="1. 框架从门户中拆分出来，删除掉无用东西，精简框架">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,6 +22,12 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MavenImportPreferences">
@@ -45,7 +53,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/yutu_web" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -180,6 +188,7 @@
       <workItem from="1576992405665" duration="305000" />
       <workItem from="1576992824978" duration="931000" />
       <workItem from="1576993993024" duration="9017000" />
+      <workItem from="1577016686689" duration="616000" />
     </task>
     <task id="LOCAL-00001" summary="1.重新生成实体类和mapper&#10;2.上传数据库和相关资料">
       <created>1576507501385</created>
@@ -209,7 +218,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576854644055</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="1. 框架从门户中拆分出来，删除掉无用东西，精简框架">
+      <created>1577016931085</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1577016931085</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -225,12 +241,49 @@
       </list>
     </option>
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="1">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="OPEN_TABS">
+      <set>
+        <option value="1" />
+      </set>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="1.重新生成实体类和mapper&#10;2.上传数据库和相关资料" />
     <MESSAGE value="1.重新生成实体类和mapper上传" />
     <MESSAGE value="1.Redis实现单点登录完成&#10;2.调整配置文件，规划位置&#10;3.删除FilterConfig配置文件" />
     <MESSAGE value="1.调整部份错误&#10;2.首页菜单功能开发" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.调整部份错误&#10;2.首页菜单功能开发" />
+    <MESSAGE value="1. 框架从门户中拆分出来，删除掉无用东西，精简框架" />
+    <option name="LAST_COMMIT_MESSAGE" value="1. 框架从门户中拆分出来，删除掉无用东西，精简框架" />
   </component>
   <component name="WindowStateProjectService">
     <state x="361" y="74" key="#Notifications" timestamp="1576408434384">
@@ -269,18 +322,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="369" y="30" key="#yutu_cloud_[install]_(1)/0.0.1536.824@0.0.1536.824" timestamp="1576987221383" />
-    <state x="356" y="1" key="CommitChangelistDialog2" timestamp="1576993906025">
+    <state x="356" y="1" key="CommitChangelistDialog2" timestamp="1577017309043">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="356" y="1" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1576993906025" />
+    <state x="356" y="1" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1577017309043" />
     <state width="451" height="466" key="DebuggerActiveHint" timestamp="1577007250459">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="451" height="466" key="DebuggerActiveHint/0.0.1536.824@0.0.1536.824" timestamp="1577007250459" />
-    <state x="549" y="113" key="FileChooserDialogImpl" timestamp="1577009245431">
+    <state x="239" y="71" key="DiffContextDialog" timestamp="1577016816067">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="113" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1577009245431" />
+    <state x="239" y="71" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1577016816067" />
+    <state x="549" y="113" key="FileChooserDialogImpl" timestamp="1577017117556">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="113" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1577017117556" />
     <state x="593" y="326" width="373" height="171" key="Github.CreateGistDialog" timestamp="1577008694010">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -333,10 +390,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1405" height="257" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1577008515984" />
-    <state x="420" y="143" key="NewModule_or_Project.wizard" timestamp="1577009114745">
+    <state x="420" y="143" key="NewModule_or_Project.wizard" timestamp="1577017174196">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="420" y="143" key="NewModule_or_Project.wizard/0.0.1536.824@0.0.1536.824" timestamp="1577009114745" />
+    <state x="420" y="143" key="NewModule_or_Project.wizard/0.0.1536.824@0.0.1536.824" timestamp="1577017174196" />
     <state x="270" y="125" key="RollbackChangesDialog" timestamp="1576854570097">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -345,14 +402,14 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="120" y="39" width="1170" height="709" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1576993828942" />
-    <state x="358" y="151" key="Vcs.Push.Dialog.v2" timestamp="1576993916280">
+    <state x="358" y="151" key="Vcs.Push.Dialog.v2" timestamp="1577017320551">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="358" y="151" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1576993916280" />
-    <state x="481" y="214" key="git4idea.merge.GitPullDialog" timestamp="1576976529868">
+    <state x="358" y="151" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1577017320551" />
+    <state x="481" y="214" key="git4idea.merge.GitPullDialog" timestamp="1577017266422">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="481" y="214" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1576976529868" />
+    <state x="481" y="214" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1577017266422" />
     <state x="98" y="151" width="672" height="678" key="search.everywhere.popup" timestamp="1577004441496">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
