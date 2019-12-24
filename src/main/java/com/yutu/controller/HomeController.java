@@ -2,7 +2,6 @@ package com.yutu.controller;
 
 import com.yutu.entity.MsgPack;
 import com.yutu.entity.SessionUser;
-import com.yutu.entity.table.TMenuSystem;
 import com.yutu.service.IHomeService;
 import com.yutu.util.JsonListUtil;
 import com.yutu.util.RedisUtils;
@@ -37,23 +36,9 @@ public class HomeController {
     **/
     @RequestMapping(value = "getSysMenuList")
     public MsgPack getSysMenuList(HttpServletRequest request) {
-        MsgPack<List<TMenuSystem>> msgPask = new MsgPack<List<TMenuSystem>>();
-        SessionUser user =(SessionUser) sessionUserManager.getSessionUser();
-        if(user!=null){
-            msgPask.setStatus(1);
-            String strMenu=user.getMenu();
-            List<TMenuSystem> menu= JsonListUtil.jsonToList(strMenu,TMenuSystem.class);
-            List<TMenuSystem> menuReturn=new ArrayList<>();
-            //便利菜单添加token
-            for ( TMenuSystem tMenuSystem  : menu){
-                String menuUrl=tMenuSystem.getMenuUrl();
-                tMenuSystem.setMenuUrl(menuUrl+"?token="+request.getSession().getId());
-                menuReturn.add(tMenuSystem);
-            }
-            msgPask.setData(menuReturn);
-        }else {
-            msgPask.setStatus(0);
-        }
-        return msgPask;
+        MsgPack msgPack=new MsgPack();
+        //通过接口获得菜单
+
+        return msgPack;
     }
 }

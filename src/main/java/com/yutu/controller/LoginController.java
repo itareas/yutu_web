@@ -6,7 +6,6 @@ import com.yutu.entity.ConfigConstants;
 import com.yutu.entity.MsgPack;
 import com.yutu.entity.SessionUser;
 import com.yutu.entity.table.TLogLanding;
-import com.yutu.service.ILogManagerService;
 import com.yutu.service.ILoginService;
 import com.yutu.util.PortalIntegratedManager;
 import com.yutu.util.RedisUtils;
@@ -36,8 +35,6 @@ public class LoginController {
 
     @Resource
     private ILoginService loginService;
-    @Resource
-    private ILogManagerService logManageService;
     @Resource
     private RedisUtils redisUtils;
     @Resource

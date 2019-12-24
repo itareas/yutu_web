@@ -1,13 +1,20 @@
 package com.yutu.entity;
 
-import java.util.Map;
-
 /**
  * @Author: zhaobc
  * @Date: 2019/4/20 21:57
  * @Description: Json交互消息包
  **/
 public class MsgPack<T> {
+
+    /**
+    * @Author: zhaobc
+    * @Date: 2019-12-23 10:24
+    * @Description: 构造函数 设置默认值
+    **/
+    public MsgPack(){
+       this.setStatus(0);
+    }
 
     /**
      * @Author: zhaobc

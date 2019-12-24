@@ -5,7 +5,6 @@ import com.yutu.entity.MsgPack;
 import com.yutu.entity.SessionUser;
 import com.yutu.entity.table.TLogLanding;
 import com.yutu.entity.table.TSysUser;
-import com.yutu.service.ILogManagerService;
 import com.yutu.util.AESUtils;
 import com.yutu.util.RedisUtils;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +27,6 @@ import java.util.UUID;
 public class WebService {
     @Resource
     private RedisUtils redisUtils;
-    @Resource
-    private ILogManagerService logManageService;
 
     @PostMapping("/getTest")
     @ResponseBody

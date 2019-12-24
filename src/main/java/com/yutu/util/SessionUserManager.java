@@ -33,7 +33,6 @@ public class SessionUserManager {
      **/
     public MsgPack verificationSessionUser() {
         MsgPack  msgPack =new MsgPack();
-        msgPack.setStatus(0);
         SessionUser sessionUser = getSessionUser();
         if (sessionUser != null) {
             //增加延迟时间
@@ -92,7 +91,6 @@ public class SessionUserManager {
      **/
     public MsgPack setSessionUser(SessionUser sessionUser) {
         MsgPack msgPack = new MsgPack();
-        msgPack.setStatus(0);
         //判断session
         HttpSession session = request.getSession(false);
         //判断是ses否为空
@@ -130,7 +128,6 @@ public class SessionUserManager {
      **/
     public MsgPack expireSessionUser(SessionUser sessionUser) {
         MsgPack msgPack = new MsgPack();
-        msgPack.setStatus(0);
         if (sessionUser != null) {
             switch (SystemPropertiesConfig.System_LoginStorage_Type) {
                 case "session":
