@@ -7,10 +7,7 @@ import com.yutu.entity.MsgPack;
 import com.yutu.entity.SessionUser;
 import com.yutu.entity.api.ApiUser;
 import com.yutu.entity.table.TLogLanding;
-import com.yutu.entity.table.TMenuSystem;
-import com.yutu.mapper.mysql.TCodConfigMapper;
 import com.yutu.mapper.mysql.TLogLandingMapper;
-import com.yutu.mapper.mysql.TMenuSystemMapper;
 import com.yutu.mapper.mysql.TSysUserMapper;
 import com.yutu.service.ILoginService;
 import com.yutu.util.PortalIntegratedManager;
@@ -41,10 +38,6 @@ public class LoginServiceImpl implements ILoginService {
     private TSysUserMapper sysUserMapper;
     @Resource
     private TLogLandingMapper logLandingMapper;
-    @Resource
-    private TMenuSystemMapper tMenuSystemMapper;
-    @Resource
-    private TCodConfigMapper tCodConfigMapper;
     @Resource
     private SessionUserManager sessionUserManager;
     @Resource
@@ -85,18 +78,12 @@ public class LoginServiceImpl implements ILoginService {
             sessionUser.setUserSafety(security);
             sessionUser.setRoleId(userInfo.get("role_uuid"));
             sessionUser.setOrgId(userInfo.get("org_uuid"));
-            //获得菜单列表
-            List<TMenuSystem> listMenu=tMenuSystemMapper.getRoleMenuSys(userInfo.get("role_uuid"));
-            sessionUser.setMenu(JSON.toJSONString(listMenu));
             //判断session 存储sesion对象
             msgPack= sessionUserManager.setSessionUser(sessionUser);
             //记录日志
             landing.setLoginUserid(userInfo.get("uuid"));
             landing.setLoginSessionid(session.getId());
             landing.setLoginResult(msgPack.getStatus());
-        } else {
-            //记录登录信息并返回
-            msgPack.setStatus(0);
         }
 
         //数据库存储登录日志

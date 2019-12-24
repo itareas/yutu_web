@@ -2,8 +2,6 @@ package com.yutu.service.impl;
 
 import com.yutu.entity.MsgPack;
 import com.yutu.mapper.mysql.IMySqlMapper;
-import com.yutu.mapper.oracle.IOracleMapper;
-import com.yutu.mapper.sqlserver.ISqlServerMapper;
 import com.yutu.service.IHomeService;
 import org.springframework.stereotype.Service;
 
