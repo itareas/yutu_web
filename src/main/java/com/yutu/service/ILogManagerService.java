@@ -2,7 +2,6 @@ package com.yutu.service;
 
 import com.yutu.entity.MsgPack;
 import com.yutu.entity.table.TLogLanding;
-import com.yutu.entity.table.TLogOperation;
 
 /**
  * @ClassName: ILogService
@@ -19,11 +18,5 @@ public interface ILogManagerService {
     MsgPack insertLandingLog(TLogLanding landing);
 
 
-    /**
-     * @Author: zhaobc
-     * @Date: 2019/4/21 17:32
-     * @Description: 插入登陆日志
-     **/
-    MsgPack insertOperationLog(TLogOperation operation);
 
 }
