@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.yutu.entity.ConfigConstants;
 import com.yutu.entity.MsgPack;
 import com.yutu.entity.SessionUser;
+import com.yutu.entity.api.ApiAuth;
 import com.yutu.entity.api.ApiUser;
 import com.yutu.entity.table.TLogLanding;
 import com.yutu.mapper.mysql.TLogLandingMapper;
@@ -106,15 +107,15 @@ public class LoginServiceImpl implements ILoginService {
         String security = ip + "<yutu_frame>" + request.getHeader("User-Agent");
 
         //报头信息
-        JSONObject jsonAuth = new JSONObject();
-        jsonAuth.put("token", token);//链接参数
-        jsonAuth.put("appKey", appKey);//应用key，由系统管理员发放
+        ApiAuth apiAuth =new ApiAuth();
+        apiAuth.setTOKEN(token);//链接参数
+        apiAuth.setAPPKEY(appKey);//应用key，由系统管理员发放
 
         JSONObject jsonObject=new JSONObject();
         String loginStatus="";
         try {
             //判断登录接口
-            String resultAuth =PortalIntegratedManager.getInterfaceValue(authUrl, jsonAuth, "/auth/loginSSO");
+            String resultAuth =PortalIntegratedManager.getInterfaceValue(authUrl, (JSON) JSON.toJSON(apiAuth), "/auth/loginSSO");
             msgPack=JSONObject.parseObject(resultAuth,MsgPack.class);
 
             ApiUser apiUser=(ApiUser)msgPack.getData();
@@ -144,9 +145,9 @@ public class LoginServiceImpl implements ILoginService {
             //接口记录日志
             //报头信息
             JSONObject jsonLog = new JSONObject();
-            jsonLog.put("token", token);//链接参数
-            jsonLog.put("appKey", appKey);//应用key，由系统管理员发放
-            jsonLog.put("landing", landing);//应用key，由系统管理员发放
+            jsonLog.put("TOKEN", token);//链接参数
+            jsonLog.put("APPKEY", appKey);//应用key，由系统管理员发放
+            jsonLog.put("LANDING", landing);//应用key，由系统管理员发放
 
             String resultLog =PortalIntegratedManager.getInterfaceValue(authUrl, jsonLog, "/auth/loginSSO");
             MsgPack msgPackLog= JSONObject.parseObject(resultLog,MsgPack.class);
