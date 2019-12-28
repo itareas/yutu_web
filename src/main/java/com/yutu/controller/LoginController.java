@@ -7,7 +7,6 @@ import com.yutu.entity.MsgPack;
 import com.yutu.entity.SessionUser;
 import com.yutu.entity.table.TLogLanding;
 import com.yutu.service.ILoginService;
-import com.yutu.util.PortalIntegratedManager;
 import com.yutu.util.RedisUtils;
 import com.yutu.util.SessionUserManager;
 import org.apache.log4j.Logger;
@@ -95,13 +94,13 @@ public class LoginController {
             jsonLog.put("appKey", ConfigConstants.Auth_AppKey);//应用key，由系统管理员发放
             jsonLog.put("landing", landing);//应用key，由系统管理员发放
             //退出日志
-            String resultLog = PortalIntegratedManager.getInterfaceValue(ConfigConstants.Auth_Service, jsonLog, "/auth/loginSSO");
-            MsgPack msgPack=  JSONObject.parseObject(resultLog,MsgPack.class);
-            if(msgPack.getStatus()==1){
-                logger.info("==============>门户登录日志记录成功！---------------------");
-            }else {
-                logger.info("==============>门户登录日志记录失败！---------------------");
-            }
+           // String resultLog = PortalIntegratedManager.getInterfaceValue(ConfigConstants.Auth_Service, jsonLog, "/auth/loginSSO");
+//            MsgPack msgPack=  JSONObject.parseObject(resultLog,MsgPack.class);
+//            if(msgPack.getStatus()==1){
+//                logger.info("==============>门户登录日志记录成功！---------------------");
+//            }else {
+//                logger.info("==============>门户登录日志记录失败！---------------------");
+//            }
             //刷新页面
             response.sendRedirect("../login");
         }

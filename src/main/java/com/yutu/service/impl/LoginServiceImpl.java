@@ -11,7 +11,7 @@ import com.yutu.entity.table.TLogLanding;
 import com.yutu.mapper.mysql.TLogLandingMapper;
 import com.yutu.mapper.mysql.TSysUserMapper;
 import com.yutu.service.ILoginService;
-import com.yutu.util.PortalIntegratedManager;
+import com.yutu.util.JerseyClientUtils;
 import com.yutu.util.SessionUserManager;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
@@ -20,10 +20,8 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import javax.ws.rs.core.Form;
+import java.util.*;
 
 /**
  * @ClassName:LoginServiceImpl
@@ -107,16 +105,17 @@ public class LoginServiceImpl implements ILoginService {
         String security = ip + "<yutu_frame>" + request.getHeader("User-Agent");
 
         //报头信息
-        ApiAuth apiAuth =new ApiAuth();
-        apiAuth.setTOKEN(token);//链接参数
-        apiAuth.setAPPKEY(appKey);//应用key，由系统管理员发放
+        Map<String,Object> map =new HashMap<>();
+        map.put("TOKEN",token);//链接参数
+        map.put("APPKEY",appKey);//应用key，由系统管理员发放
 
         JSONObject jsonObject=new JSONObject();
         String loginStatus="";
         try {
             //判断登录接口
-            String resultAuth =PortalIntegratedManager.getInterfaceValue(authUrl, (JSON) JSON.toJSON(apiAuth), "/auth/loginSSO");
-            msgPack=JSONObject.parseObject(resultAuth,MsgPack.class);
+              msgPack= JerseyClientUtils.getJerseyClientUtil().getInvoke(authUrl+"/auth/loginSSO",map,null,MsgPack.class);
+//            String resultAuth =PortalIntegratedManager.getInterfaceValue(authUrl, (JSON) JSON.toJSON(apiAuth), "/auth/loginSSO");
+//            msgPack=JSONObject.parseObject(resultAuth,MsgPack.class);
 
             ApiUser apiUser=(ApiUser)msgPack.getData();
             HttpSession session = request.getSession();
@@ -149,13 +148,13 @@ public class LoginServiceImpl implements ILoginService {
             jsonLog.put("APPKEY", appKey);//应用key，由系统管理员发放
             jsonLog.put("LANDING", landing);//应用key，由系统管理员发放
 
-            String resultLog =PortalIntegratedManager.getInterfaceValue(authUrl, jsonLog, "/auth/loginSSO");
-            MsgPack msgPackLog= JSONObject.parseObject(resultLog,MsgPack.class);
-            if(msgPackLog.getStatus()==1){
-                logger.info("==============>门户登录日志记录成功！---------------------");
-            }else {
-                logger.info("==============>门户登录日志记录失败！---------------------");
-            }
+            //String resultLog =PortalIntegratedManager.getInterfaceValue(authUrl, jsonLog, "/auth/loginSSO");
+            //MsgPack msgPackLog= JSONObject.parseObject(resultLog,MsgPack.class);
+//            if(msgPackLog.getStatus()==1){
+//                logger.info("==============>门户登录日志记录成功！---------------------");
+//            }else {
+//                logger.info("==============>门户登录日志记录失败！---------------------");
+//            }
 
         } catch (Exception e) {
             msgPack.setData(0);
