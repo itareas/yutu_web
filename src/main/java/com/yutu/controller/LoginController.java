@@ -1,13 +1,12 @@
 package com.yutu.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.yutu.entity.ConfigConstants;
 import com.yutu.entity.MsgPack;
 import com.yutu.entity.SessionUser;
-import com.yutu.entity.table.TLogLanding;
 import com.yutu.service.ILoginService;
 import com.yutu.util.RedisUtils;
+import com.yutu.util.RestClientUtils;
 import com.yutu.util.SessionUserManager;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -63,19 +64,21 @@ public class LoginController {
         String sessionId = session.getId();
         SessionUser sessionUser=new SessionUser();
         //获得参数插入日志
-        TLogLanding landing = new TLogLanding();
+        Map<String,Object>mapLanding=new HashMap<>();
         if (request.getSession(false) != null) {
             if (sessionId != null) {
                 sessionUser = sessionUserUtils.getSessionUser();
-                landing.setUuid(UUID.randomUUID().toString());
-                landing.setLoginUserid(sessionUser.getUuid());
-                landing.setLoginAccount(sessionUser.getUserAccount());
-                landing.setLoginAddress(request.getServletPath());
-                landing.setLoginSessionid(sessionId);
-                landing.setLoginDate(new Date());
-                landing.setLoginType("子系统一注销");
-                landing.setLoginAppname("子系统一");
-                landing.setLoginIp(request.getRemoteAddr());
+                mapLanding.put("token", sessionUser.getToken());//链接参数
+                mapLanding.put("appkey", ConfigConstants.Auth_AppKey);
+                mapLanding.put("uuid", UUID.randomUUID().toString());
+                mapLanding.put("loginUserid", sessionUser.getUuid());
+                mapLanding.put("loginAccount", sessionUser.getUserAccount());
+                mapLanding.put("loginIp", request.getRemoteAddr());
+                mapLanding.put("loginSessionid", session.getId());
+                mapLanding.put("loginDate", new Date());
+                mapLanding.put("loginType", "注销");
+                mapLanding.put("loginAppname","子系统一");
+                mapLanding.put("loginAddress", request.getServletPath());
             }
         }
         try {
@@ -84,23 +87,20 @@ public class LoginController {
             //清空本地session
             session.invalidate();
         } catch (Exception e) {
-            landing.setLoginResult(0);
-            landing.setRemarks(e.toString());
+            mapLanding.put("loginResult",1);
+            mapLanding.put("remarks",e.toString());
         } finally {
-            landing.setLoginResult(1);
+            mapLanding.put("loginResult",1);
             //插入日志
             JSONObject jsonLog = new JSONObject();
-            jsonLog.put("token", sessionUser.getToken());//链接参数
-            jsonLog.put("appKey", ConfigConstants.Auth_AppKey);//应用key，由系统管理员发放
-            jsonLog.put("landing", landing);//应用key，由系统管理员发放
+
             //退出日志
-           // String resultLog = PortalIntegratedManager.getInterfaceValue(ConfigConstants.Auth_Service, jsonLog, "/auth/loginSSO");
-//            MsgPack msgPack=  JSONObject.parseObject(resultLog,MsgPack.class);
-//            if(msgPack.getStatus()==1){
-//                logger.info("==============>门户登录日志记录成功！---------------------");
-//            }else {
-//                logger.info("==============>门户登录日志记录失败！---------------------");
-//            }
+            MsgPack msgPack = RestClientUtils.post(ConfigConstants.Auth_Service, "/log/landing/add", mapLanding,MsgPack.class);
+            if(msgPack.getStatus()==1){
+                logger.info("==============>门户登录日志记录成功！---------------------");
+            }else {
+                logger.info("==============>门户登录日志记录失败！---------------------");
+            }
             //刷新页面
             response.sendRedirect("../login");
         }

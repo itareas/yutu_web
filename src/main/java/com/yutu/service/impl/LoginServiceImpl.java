@@ -1,26 +1,23 @@
 package com.yutu.service.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.yutu.entity.ConfigConstants;
 import com.yutu.entity.MsgPack;
 import com.yutu.entity.SessionUser;
-import com.yutu.entity.api.ApiAuth;
 import com.yutu.entity.api.ApiUser;
-import com.yutu.entity.table.TLogLanding;
-import com.yutu.mapper.mysql.TLogLandingMapper;
 import com.yutu.mapper.mysql.TSysUserMapper;
 import com.yutu.service.ILoginService;
-import com.yutu.util.JerseyClientUtils;
+import com.yutu.util.RestClientUtils;
 import com.yutu.util.SessionUserManager;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
+import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.ws.rs.core.Form;
 import java.util.*;
 
 /**
@@ -36,8 +33,6 @@ public class LoginServiceImpl implements ILoginService {
     @Resource
     private TSysUserMapper sysUserMapper;
     @Resource
-    private TLogLandingMapper logLandingMapper;
-    @Resource
     private SessionUserManager sessionUserManager;
     @Resource
     private HttpServletRequest request;
@@ -48,8 +43,7 @@ public class LoginServiceImpl implements ILoginService {
         MsgPack msgPack = new MsgPack();
         //给密码md5加密
         userPwd = DigestUtils.md5Hex(userPwd + "yutu&zhaobc@2019");
-        Map<String,String> userInfo = sysUserMapper.getLoginVerification(userAccount, userPwd);
-
+        Map<String, String> userInfo = sysUserMapper.getLoginVerification(userAccount, userPwd);
         //获得客户端身份信息便于验证
         String address = request.getServletPath();
         String ip = request.getRemoteAddr();
@@ -57,14 +51,6 @@ public class LoginServiceImpl implements ILoginService {
         String security = ip + "<yutu_frame>" + request.getHeader("User-Agent");
 
         //日志实体类 并赋值
-        TLogLanding landing = new TLogLanding();
-        landing.setUuid(UUID.randomUUID().toString());
-        landing.setLoginAddress(address);
-        landing.setLoginAccount(userAccount);
-        landing.setLoginDate(new Date());
-        landing.setLoginIp(ip);
-        landing.setLoginType("子系统一登陆");
-        landing.setLoginAppname("子系统一");
         HttpSession session = request.getSession();
         //判断登录是否成功
         if (userInfo != null) {
@@ -78,26 +64,20 @@ public class LoginServiceImpl implements ILoginService {
             sessionUser.setRoleId(userInfo.get("role_uuid"));
             sessionUser.setOrgId(userInfo.get("org_uuid"));
             //判断session 存储sesion对象
-            msgPack= sessionUserManager.setSessionUser(sessionUser);
-            //记录日志
-            landing.setLoginUserid(userInfo.get("uuid"));
-            landing.setLoginSessionid(session.getId());
-            landing.setLoginResult(msgPack.getStatus());
-        }
+            msgPack = sessionUserManager.setSessionUser(sessionUser);
 
-        //数据库存储登录日志
-        int landingCount = logLandingMapper.insert(landing);
-        System.out.print("=============================>"+msgPack.getMsg()+"门户登陆日志插入" + landingCount + "条-------------------------------\r\n");
+        }
+        System.out.print("=============================>" + msgPack.getMsg() + "系统登录-------------------------------\r\n");
 
         return msgPack;
     }
 
     @Override
     public MsgPack getLoginSSOVerification(String token) {
-        MsgPack msgPack=new MsgPack();
+        MsgPack msgPack = new MsgPack();
         //获得appkey
-        String appKey=ConfigConstants.Auth_AppKey;
-        String authUrl=ConfigConstants.Auth_Service;
+        String appKey = ConfigConstants.Auth_AppKey;
+        String authUrl = ConfigConstants.Auth_Service;
         //获得客户端身份信息便于验证
         String address = request.getServletPath();
         String ip = request.getRemoteAddr();
@@ -105,19 +85,20 @@ public class LoginServiceImpl implements ILoginService {
         String security = ip + "<yutu_frame>" + request.getHeader("User-Agent");
 
         //报头信息
-        Map<String,Object> map =new HashMap<>();
-        map.put("TOKEN",token);//链接参数
-        map.put("APPKEY",appKey);//应用key，由系统管理员发放
-
-        JSONObject jsonObject=new JSONObject();
-        String loginStatus="";
+        Map map = new HashMap();
+        map.put("TOKEN", token);//链接参数
+        map.put("APPKEY", appKey);//应用key，由系统管理员发放
+        ClientConfig clientConfig = new ClientConfig();
+        clientConfig.register(JacksonJsonProvider.class);
+        JSONObject jsonObject = new JSONObject();
+        String loginStatus = "";
         try {
             //判断登录接口
-              msgPack= JerseyClientUtils.getJerseyClientUtil().getInvoke(authUrl+"/auth/loginSSO",map,null,MsgPack.class);
-//            String resultAuth =PortalIntegratedManager.getInterfaceValue(authUrl, (JSON) JSON.toJSON(apiAuth), "/auth/loginSSO");
-//            msgPack=JSONObject.parseObject(resultAuth,MsgPack.class);
-
-            ApiUser apiUser=(ApiUser)msgPack.getData();
+            msgPack = RestClientUtils.put(authUrl, "/auth/loginSSO", map,MsgPack.class);
+            if (msgPack.getStatus() < 1) {
+                return msgPack;
+            }
+            ApiUser apiUser = JSONObject.parseObject(msgPack.getData().toString(), ApiUser.class);
             HttpSession session = request.getSession();
             SessionUser sessionUser = new SessionUser();
             sessionUser.setSessionId(session.getId());
@@ -127,40 +108,34 @@ public class LoginServiceImpl implements ILoginService {
             sessionUser.setUserSafety(security);
             sessionUser.setToken(token);
             //判断session 存储sesion对象
-            msgPack= sessionUserManager.setSessionUser(sessionUser);
+            msgPack = sessionUserManager.setSessionUser(sessionUser);
 
-            //记录日志
-            TLogLanding landing = new TLogLanding();
-            landing.setUuid(UUID.randomUUID().toString());
-            landing.setLoginAddress(address);
-            landing.setLoginAccount(sessionUser.getUserAccount());
-            landing.setLoginDate(new Date());
-            landing.setLoginIp(ip);
-            landing.setLoginType("子系统一登陆");
-            landing.setLoginAppname("子系统一");
-            landing.setLoginUserid(sessionUser.getUuid());
-            landing.setLoginSessionid(session.getId());
-            landing.setLoginResult(msgPack.getStatus());
             //接口记录日志
-            //报头信息
-            JSONObject jsonLog = new JSONObject();
-            jsonLog.put("TOKEN", token);//链接参数
-            jsonLog.put("APPKEY", appKey);//应用key，由系统管理员发放
-            jsonLog.put("LANDING", landing);//应用key，由系统管理员发放
+            Map<String, Object> mapLanding = new HashMap();
+            mapLanding.put("token", token);//链接参数
+            mapLanding.put("appkey", appKey);
+            mapLanding.put("uuid", UUID.randomUUID().toString());
+            mapLanding.put("loginUserid", sessionUser.getUuid());
+            mapLanding.put("loginAccount", sessionUser.getUserAccount());
+            mapLanding.put("loginIp", ip);
+            mapLanding.put("loginSessionid", session.getId());
+            mapLanding.put("loginDate", new Date());
+            mapLanding.put("loginType", "登陆");
+            mapLanding.put("loginResult", 1);
+            mapLanding.put("loginAppname", "子系统一");
+            mapLanding.put("loginAddress", address);
+            mapLanding.put("remarks", null);
 
-            //String resultLog =PortalIntegratedManager.getInterfaceValue(authUrl, jsonLog, "/auth/loginSSO");
-            //MsgPack msgPackLog= JSONObject.parseObject(resultLog,MsgPack.class);
-//            if(msgPackLog.getStatus()==1){
-//                logger.info("==============>门户登录日志记录成功！---------------------");
-//            }else {
-//                logger.info("==============>门户登录日志记录失败！---------------------");
-//            }
+            MsgPack msgPackLog = RestClientUtils.post(authUrl, "/log/landing/add",mapLanding, MsgPack.class);
+            if (msgPackLog.getStatus() == 1) {
+                logger.info("==============>门户登录日志记录成功！---------------------");
+            } else {
+                logger.info("==============>门户登录日志记录失败！---------------------");
+            }
 
         } catch (Exception e) {
-            msgPack.setData(0);
+            msgPack.setMsg(e.toString());
         }
         return msgPack;
     }
-
-
 }

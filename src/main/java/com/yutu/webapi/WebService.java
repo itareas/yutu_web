@@ -2,19 +2,14 @@ package com.yutu.webapi;
 
 import com.alibaba.fastjson.JSON;
 import com.yutu.entity.MsgPack;
-import com.yutu.entity.SessionUser;
-import com.yutu.entity.table.TLogLanding;
 import com.yutu.entity.table.TSysUser;
 import com.yutu.util.AESUtils;
 import com.yutu.util.RedisUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * @ClassName: WebController
