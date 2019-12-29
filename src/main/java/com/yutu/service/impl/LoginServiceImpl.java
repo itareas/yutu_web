@@ -56,7 +56,7 @@ public class LoginServiceImpl implements ILoginService {
         if (userInfo != null) {
             //session存储用户信息操作
             SessionUser sessionUser = new SessionUser();
-            sessionUser.setSessionId(session.getId());
+            sessionUser.setSessionId("zbcWeb-"+session.getId());
             sessionUser.setUuid(userInfo.get("uuid"));
             sessionUser.setUserAccount(userInfo.get("user_account"));
             sessionUser.setUserName(userInfo.get("user_name"));
@@ -101,7 +101,7 @@ public class LoginServiceImpl implements ILoginService {
             ApiUser apiUser = JSONObject.parseObject(msgPack.getData().toString(), ApiUser.class);
             HttpSession session = request.getSession();
             SessionUser sessionUser = new SessionUser();
-            sessionUser.setSessionId(session.getId());
+            sessionUser.setSessionId("zbcWeb-"+session.getId());
             sessionUser.setUuid(apiUser.getUuid());
             sessionUser.setUserAccount(apiUser.getUserAccount());
             sessionUser.setUserName(apiUser.getUserName());

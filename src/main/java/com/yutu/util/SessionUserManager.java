@@ -55,7 +55,7 @@ public class SessionUserManager {
                 case "session":
                     if (session.getId() != null) {
                         //Session版获取数据
-                        SessionUser sessionUs = (SessionUser) session.getAttribute(session.getId());
+                        SessionUser sessionUs = (SessionUser) session.getAttribute("zbcWeb-"+session.getId());
                         return sessionUs;
                     }
                     break;
@@ -67,7 +67,7 @@ public class SessionUserManager {
                         return sessionUser;
                     } else {
                         if (session.getId() != null) {
-                            SessionUser sessionUser = (SessionUser) redisUtils.get(session.getId());
+                            SessionUser sessionUser = (SessionUser) redisUtils.get("zbcWeb-"+session.getId());
                             return sessionUser;
                         }
                     }
@@ -75,7 +75,7 @@ public class SessionUserManager {
                 default:
                     if (session.getId() != null) {
                         //Session版获取数据
-                        SessionUser sessionUser = (SessionUser) session.getAttribute(session.getId());
+                        SessionUser sessionUser = (SessionUser) session.getAttribute("zbcWeb-"+session.getId());
                         return sessionUser;
                     }
                     break;

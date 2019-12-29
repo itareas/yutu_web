@@ -14,7 +14,7 @@
          dataType: "JSON",
          success: function (msgPack) {
              if (msgPack.status == 1) {
-                 $.each(msgPack.data,function (i,item) {
+                 $.each($.parseJSON(msgPack.data),function (i,item) {
                      $("#menuList").append('<li class="menuLi"><a href="'+item.menuUrl+'" target="_blank">'+item.menuTitle+'</a></li>');
                  })
 
