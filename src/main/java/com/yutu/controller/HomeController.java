@@ -40,20 +40,20 @@ public class HomeController {
     public MsgPack getSysMenuList(HttpServletRequest request) {
         MsgPack msgPack = new MsgPack();
         SessionUser sessionUser = sessionUserManager.getSessionUser();
-        if (sessionUser.getMenu()==null) {
+        if (sessionUser.getMenuBus()==null) {
             Map<String, Object> map = new HashMap<>();
-            map.put("TOKEN", sessionUser.getToken());//链接参数
-            map.put("APPKEY", ConfigConstants.Auth_AppKey);//应用key，由系统管理员发放
+            map.put("token", sessionUser.getToken());//链接参数
+            map.put("appkey", ConfigConstants.Auth_AppKey);//应用key，由系统管理员发放
             msgPack = RestClientUtils.put(ConfigConstants.Auth_Service, "/menu/business", map, MsgPack.class);
             if (msgPack.getStatus() > 0) {
                 msgPack.setStatus(1);
                 msgPack.setData(msgPack.getData().toString());
-                sessionUser.setMenu(msgPack.getData().toString());
+                sessionUser.setMenuBus(msgPack.getData().toString());
                 msgPack = sessionUserManager.setSessionUser(sessionUser);
             }
         } else {
             msgPack.setStatus(1);
-            msgPack.setData(sessionUser.getMenu());
+            msgPack.setData(sessionUser.getMenuBus());
         }
         return msgPack;
     }

@@ -2,6 +2,9 @@ package com.yutu.filter;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -16,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import com.yutu.configuration.SystemPropertiesConfig;
 import com.yutu.entity.MsgPack;
 import com.yutu.util.RedisUtils;
+import com.yutu.util.RestClientUtils;
 import com.yutu.util.SessionUserManager;
 import org.apache.log4j.Logger;
 import org.apache.commons.lang3.StringUtils;
@@ -40,6 +44,8 @@ public class MyFilter implements Filter {
     @Resource
     private SessionUserManager sessionUserManager;
 
+    private long overtime;
+
     Logger logger = Logger.getLogger(MyFilter.class);
 
     @Override
@@ -61,6 +67,7 @@ public class MyFilter implements Filter {
                     return;
                 }
             }
+
             //活动url地址和token
             String url = request.getServletPath();
             String token = request.getParameter("token");
@@ -69,7 +76,7 @@ public class MyFilter implements Filter {
             SessionUser sessionUser = new SessionUser();
             //判断是否有数据
             boolean isUserData = false;
-            //判断是否为单点登录
+            //判断是否为redis单点登录
             if (SystemPropertiesConfig.System_LoginStorage_Type.equals("redis") && token != null && url.contains("loginSSO")) {
                 //Redis版获取数据
                 sessionUser = (SessionUser) redisUtils.get(token);
@@ -83,14 +90,24 @@ public class MyFilter implements Filter {
                 MsgPack msgPack = sessionUserManager.verificationSessionUser();
                 isUserData = msgPack.getStatus() == 1 ? true : false;
                 sessionUser = (SessionUser) msgPack.getData();
-             }
+            }
             //判断session是否为null  sesson中存储客户端标识字段，需要进行验证是否是登陆着
             if (isUserData && sessionUser.getUserSafety().equals(security)) {
                 if (url.equals("/")) {
                     //重定向到首页
                     response.sendRedirect(SystemPropertiesConfig.System_Home_Page);
                 }
-                chain.doFilter(request, response);
+                //判断是否为单点登录，单点登录要要进行token验证
+                if (SystemPropertiesConfig.System_LoginStorage_Type.equals("session")&&SystemPropertiesConfig.System_Login_Type.equals("SSO")) {
+                    if (remoteVerify(session, sessionUser.getToken())) {
+                        chain.doFilter(request, response);
+                    } else {
+                        //重定向到登录页(需要在static文件夹下建立此html文件)
+                        redirectHome(request, response);
+                    }
+                } else {
+                    chain.doFilter(request, response);
+                }
             } else {
                 //判断是否需要白名单
                 if (StringUtils.isNotBlank(SystemPropertiesConfig.System_Filter_Path)) {
@@ -135,6 +152,34 @@ public class MyFilter implements Filter {
                 if (httpUrl.equals(eu.trim()) || (httpUrl.contains("/api/") || httpUrl.contains(".css") || httpUrl.contains(".js") || httpUrl.contains(".png") || httpUrl.contains(".jpg"))) {
                     return true;
                 }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @Author: zhaobc
+     * @Date: 2020/1/1 10:42
+     * @Description: 核心方法，通过接口验证token是否过期
+     **/
+    private boolean remoteVerify(HttpSession session, String token) throws Exception {
+        int interceptorOverTime = Integer.parseInt(SystemPropertiesConfig.System_Interceptor_OverTime);
+        //定时  在一定时间段 只能访问一次，防止请求过于频繁 时间段内直接返回true
+        if (new Date().getTime() - overtime <= interceptorOverTime) {
+            return true;
+        }
+        //判断token
+        if (StringUtils.isNotBlank(StringUtils.trimToNull(token))) {
+            //访问token接口
+            Map<String, Object> map = new HashMap<>();
+            map.put("token", token);//链接参数
+            MsgPack msgPack = RestClientUtils.put(ConfigConstants.Auth_Service, "/auth/token", map, MsgPack.class);
+            if (msgPack.getStatus() == 1) {
+                overtime = new Date().getTime();
+                return true;
+            } else {
+                //清空本地session
+                sessionUserManager.logoutSessionUser(session);
             }
         }
         return false;

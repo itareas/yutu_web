@@ -48,7 +48,7 @@ public class RedirectController {
                 if(msgPack.getStatus()==1){
                     response.sendRedirect("/index");
                 }else {
-                    response.sendRedirect("/error");
+                    response.sendRedirect("/login");
                 }
                 break;
             case "redis":

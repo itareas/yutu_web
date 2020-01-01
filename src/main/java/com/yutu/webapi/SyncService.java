@@ -1,24 +1,26 @@
 package com.yutu.webapi;
 
 import com.yutu.entity.MsgPack;
-import com.yutu.entity.sync.SyncOrganization;
-import com.yutu.entity.sync.SyncUser;
+import com.yutu.entity.table.TSysOrganization;
+import com.yutu.entity.table.TSysUser;
 import com.yutu.service.IOrganizationService;
 import com.yutu.service.IUserService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 /**
  * @Author: zhaobc
  * @Date: 2019-12-19 13:56
  * @Description:数据同步接口服务
  */
-@RestController
-@RequestMapping("/sync")
+@Component
+@Path("sync")
 public class SyncService {
     @Resource
     private IUserService iUserService;
@@ -30,20 +32,21 @@ public class SyncService {
      * @Date: 2019-12-19 14:01
      * @Description: 同步用户接口
      **/
-    @PostMapping("/user")
-    @ResponseBody
-    public MsgPack user(SyncUser user) {
+    @POST
+    @Path(value = "user/{type}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public MsgPack user(@PathParam("type") String type, TSysUser user) {
         MsgPack msgPack = new MsgPack();
-        switch (user.getType()) {
-            case 1:
+        switch (type) {
+            case "add":
 //                添加用户
                 msgPack = iUserService.insertUser(user);
                 break;
-            case 2:
+            case "edit":
 //                修改用户
                 msgPack = iUserService.updateUser(user);
                 break;
-            case 3:
+            case "del":
 //                删除用户
                 msgPack = iUserService.delteUser(user.getUuid());
                 break;
@@ -57,20 +60,21 @@ public class SyncService {
      * @Date: 2019-12-19 14:01
      * @Description: 同步用户接口
      **/
-    @PostMapping("/organize")
-    @ResponseBody
-    public MsgPack organize(SyncOrganization organization) {
+    @POST
+    @Path(value = "organize/{type}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public MsgPack organize(@PathParam("type") String type, TSysOrganization organization) {
         MsgPack msgPack = new MsgPack();
-        switch (organization.getType()) {
-            case 1:
+        switch (type) {
+            case "add":
 //                添加部门
                 msgPack = iOrganizationService.insertOrganization(organization);
                 break;
-            case 2:
+            case "edit":
 //                修改部门
                 msgPack = iOrganizationService.updateOrganization(organization);
                 break;
-            case 3:
+            case "del":
 //                删除删除
                 msgPack = iOrganizationService.delteOrganization(organization.getUuid());
                 break;

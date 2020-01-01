@@ -56,7 +56,7 @@ public class LoginServiceImpl implements ILoginService {
         if (userInfo != null) {
             //session存储用户信息操作
             SessionUser sessionUser = new SessionUser();
-            sessionUser.setSessionId("zbcWeb-"+session.getId());
+            sessionUser.setSessionId(session.getId());
             sessionUser.setUuid(userInfo.get("uuid"));
             sessionUser.setUserAccount(userInfo.get("user_account"));
             sessionUser.setUserName(userInfo.get("user_name"));
@@ -86,22 +86,22 @@ public class LoginServiceImpl implements ILoginService {
 
         //报头信息
         Map map = new HashMap();
-        map.put("TOKEN", token);//链接参数
-        map.put("APPKEY", appKey);//应用key，由系统管理员发放
+        map.put("token", token);//链接参数
+        map.put("appkey", appKey);//应用key，由系统管理员发放
         ClientConfig clientConfig = new ClientConfig();
         clientConfig.register(JacksonJsonProvider.class);
         JSONObject jsonObject = new JSONObject();
         String loginStatus = "";
         try {
             //判断登录接口
-            msgPack = RestClientUtils.put(authUrl, "/auth/loginSSO", map,MsgPack.class);
+            msgPack = RestClientUtils.put(authUrl, "/auth/sso", map,MsgPack.class);
             if (msgPack.getStatus() < 1) {
                 return msgPack;
             }
             ApiUser apiUser = JSONObject.parseObject(msgPack.getData().toString(), ApiUser.class);
             HttpSession session = request.getSession();
             SessionUser sessionUser = new SessionUser();
-            sessionUser.setSessionId("zbcWeb-"+session.getId());
+            sessionUser.setSessionId(session.getId());
             sessionUser.setUuid(apiUser.getUuid());
             sessionUser.setUserAccount(apiUser.getUserAccount());
             sessionUser.setUserName(apiUser.getUserName());

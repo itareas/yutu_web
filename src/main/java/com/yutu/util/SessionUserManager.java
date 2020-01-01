@@ -1,6 +1,8 @@
 package com.yutu.util;
 
+import com.alibaba.fastjson.JSONObject;
 import com.yutu.configuration.SystemPropertiesConfig;
+import com.yutu.entity.ConfigConstants;
 import com.yutu.entity.MsgPack;
 import com.yutu.entity.SessionUser;
 import com.yutu.filter.MyFilter;
@@ -10,6 +12,10 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * @Author: zhaobc
@@ -32,11 +38,11 @@ public class SessionUserManager {
      * @Description: 验证session是否有效
      **/
     public MsgPack verificationSessionUser() {
-        MsgPack  msgPack =new MsgPack();
+        MsgPack msgPack = new MsgPack();
         SessionUser sessionUser = getSessionUser();
         if (sessionUser != null) {
             //增加延迟时间
-             msgPack = expireSessionUser(sessionUser);
+            msgPack = expireSessionUser(sessionUser);
         }
         return msgPack;
     }
@@ -55,7 +61,7 @@ public class SessionUserManager {
                 case "session":
                     if (session.getId() != null) {
                         //Session版获取数据
-                        SessionUser sessionUs = (SessionUser) session.getAttribute("zbcWeb-"+session.getId());
+                        SessionUser sessionUs = (SessionUser) session.getAttribute(session.getId());
                         return sessionUs;
                     }
                     break;
@@ -67,7 +73,7 @@ public class SessionUserManager {
                         return sessionUser;
                     } else {
                         if (session.getId() != null) {
-                            SessionUser sessionUser = (SessionUser) redisUtils.get("zbcWeb-"+session.getId());
+                            SessionUser sessionUser = (SessionUser) redisUtils.get(session.getId());
                             return sessionUser;
                         }
                     }
@@ -75,7 +81,7 @@ public class SessionUserManager {
                 default:
                     if (session.getId() != null) {
                         //Session版获取数据
-                        SessionUser sessionUser = (SessionUser) session.getAttribute("zbcWeb-"+session.getId());
+                        SessionUser sessionUser = (SessionUser) session.getAttribute(session.getId());
                         return sessionUser;
                     }
                     break;
@@ -115,6 +121,9 @@ public class SessionUserManager {
                         msgPack.setStatus(1);
                         break;
                 }
+            } else {
+                //如果session存储过，直接通过
+                msgPack.setStatus(1);
             }
         }
         return msgPack;
@@ -146,5 +155,57 @@ public class SessionUserManager {
             }
         }
         return msgPack;
+    }
+
+
+    /**
+     * @Author: zhaobc
+     * @Date: 2019/12/22 9:42
+     * @Description: 存储Session信息
+     **/
+    public void logoutSessionUser(HttpSession session) {
+        SessionUser sessionUser = new SessionUser();
+        //获得sessionId
+        String sessionId = session.getId();
+        //获得参数插入日志
+        Map<String, Object> mapLanding = new HashMap<>();
+        if (request.getSession(false) != null) {
+            if (sessionId != null) {
+                sessionUser = getSessionUser();
+                mapLanding.put("token", sessionUser.getToken());//链接参数
+                mapLanding.put("appkey", ConfigConstants.Auth_AppKey);
+                mapLanding.put("uuid", UUID.randomUUID().toString());
+                mapLanding.put("loginUserid", sessionUser.getUuid());
+                mapLanding.put("loginAccount", sessionUser.getUserAccount());
+                mapLanding.put("loginIp", request.getRemoteAddr());
+                mapLanding.put("loginSessionid", session.getId());
+                mapLanding.put("loginDate", new Date());
+                mapLanding.put("loginType", "注销");
+                mapLanding.put("loginAppname", "子系统一");
+                mapLanding.put("loginAddress", request.getServletPath());
+            }
+        }
+        try {
+            //清空本地session
+            session.invalidate();
+            if (SystemPropertiesConfig.System_LoginStorage_Type.equals("redis")) {
+                //清空redis里数据
+                redisUtils.del(sessionUser.getSessionId());
+            }
+        } catch (Exception e) {
+            mapLanding.put("loginResult", 1);
+            mapLanding.put("remarks", e.toString());
+        } finally {
+            mapLanding.put("loginResult", 1);
+            //插入日志
+            JSONObject jsonLog = new JSONObject();
+            //退出日志
+            MsgPack msgPack = RestClientUtils.post(ConfigConstants.Auth_Service, "/log/landing/add", mapLanding, MsgPack.class);
+            if (msgPack.getStatus() == 1) {
+                logger.info("==============>门户登录日志记录成功！---------------------");
+            } else {
+                logger.info("==============>门户登录日志记录失败！---------------------");
+            }
+        }
     }
 }
