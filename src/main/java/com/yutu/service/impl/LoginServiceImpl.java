@@ -94,7 +94,7 @@ public class LoginServiceImpl implements ILoginService {
         String loginStatus = "";
         try {
             //判断登录接口
-            msgPack = RestClientUtils.put(authUrl, "/auth/sso", map,MsgPack.class);
+            msgPack = RestClientUtils.put(authUrl, "/webapi/auth/sso", map,MsgPack.class);
             if (msgPack.getStatus() < 1) {
                 return msgPack;
             }
@@ -126,7 +126,7 @@ public class LoginServiceImpl implements ILoginService {
             mapLanding.put("loginAddress", address);
             mapLanding.put("remarks", null);
 
-            MsgPack msgPackLog = RestClientUtils.post(authUrl, "/log/landing/add",mapLanding, MsgPack.class);
+            MsgPack msgPackLog = RestClientUtils.post(authUrl, "/webapi/log/landing/add",mapLanding, MsgPack.class);
             if (msgPackLog.getStatus() == 1) {
                 logger.info("==============>门户登录日志记录成功！---------------------");
             } else {

@@ -44,7 +44,7 @@ public class HomeController {
             Map<String, Object> map = new HashMap<>();
             map.put("token", sessionUser.getToken());//链接参数
             map.put("appkey", ConfigConstants.Auth_AppKey);//应用key，由系统管理员发放
-            msgPack = RestClientUtils.put(ConfigConstants.Auth_Service, "/menu/business", map, MsgPack.class);
+            msgPack = RestClientUtils.put(ConfigConstants.Auth_Service, "/webapi/menu/business", map, MsgPack.class);
             if (msgPack.getStatus() > 0) {
                 msgPack.setStatus(1);
                 msgPack.setData(msgPack.getData().toString());

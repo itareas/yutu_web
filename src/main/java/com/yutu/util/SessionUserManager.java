@@ -5,7 +5,6 @@ import com.yutu.configuration.SystemPropertiesConfig;
 import com.yutu.entity.ConfigConstants;
 import com.yutu.entity.MsgPack;
 import com.yutu.entity.SessionUser;
-import com.yutu.filter.MyFilter;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
@@ -200,7 +199,7 @@ public class SessionUserManager {
             //插入日志
             JSONObject jsonLog = new JSONObject();
             //退出日志
-            MsgPack msgPack = RestClientUtils.post(ConfigConstants.Auth_Service, "/log/landing/add", mapLanding, MsgPack.class);
+            MsgPack msgPack = RestClientUtils.post(ConfigConstants.Auth_Service, "/webapi/log/landing/add", mapLanding, MsgPack.class);
             if (msgPack.getStatus() == 1) {
                 logger.info("==============>门户登录日志记录成功！---------------------");
             } else {
