@@ -100,7 +100,7 @@ public class SessionUserManager {
         HttpSession session = request.getSession(false);
         //判断是ses否为空
         if (session != null && sessionUser != null && sessionUser.getSessionId().length() > 0) {
-            if (session.isNew()) {
+//            if (session.isNew()) {
                 switch (SystemPropertiesConfig.System_LoginStorage_Type) {
                     case "session":
                         //存储到session中去 并设置超时时间
@@ -120,10 +120,10 @@ public class SessionUserManager {
                         msgPack.setStatus(1);
                         break;
                 }
-            } else {
-                //如果session存储过，直接通过
-                msgPack.setStatus(1);
-            }
+//            } else {
+//                //如果session存储过，直接通过
+//                msgPack.setStatus(1);
+//            }
         }
         return msgPack;
     }
