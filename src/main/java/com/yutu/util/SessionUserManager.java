@@ -169,8 +169,8 @@ public class SessionUserManager {
         //获得参数插入日志
         Map<String, Object> mapLanding = new HashMap<>();
         if (request.getSession(false) != null) {
-            if (sessionId != null) {
-                sessionUser = getSessionUser();
+            sessionUser = getSessionUser();
+            if (sessionUser!=null &&  sessionId != null) {
                 mapLanding.put("token", sessionUser.getToken());//链接参数
                 mapLanding.put("appkey", ConfigConstants.Auth_AppKey);
                 mapLanding.put("uuid", UUID.randomUUID().toString());

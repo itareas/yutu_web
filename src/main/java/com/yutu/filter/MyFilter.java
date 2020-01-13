@@ -97,7 +97,7 @@ public class MyFilter implements Filter {
                     response.sendRedirect(SystemPropertiesConfig.System_Home_Page);
                 }
                 //判断是否为单点登录，单点登录要要进行token验证
-                if (SystemPropertiesConfig.System_LoginStorage_Type.equals("session")&&SystemPropertiesConfig.System_Login_Type.equals("SSO")) {
+                if (SystemPropertiesConfig.System_LoginStorage_Type.equals("session") && SystemPropertiesConfig.System_Login_Type.equals("SSO")) {
                     if (remoteVerify(session, sessionUser.getToken())) {
                         chain.doFilter(request, response);
                     } else {
@@ -124,8 +124,12 @@ public class MyFilter implements Filter {
                 if (requestType != null && "XMLHttpRequest".equals(requestType)) {
                     response.getWriter().write(SystemPropertiesConfig.System_Filter_Path);
                 } else {
-                    //重定向到登录页(需要在static文件夹下建立此html文件)
-                    redirectHome(request.getContextPath() + SystemPropertiesConfig.System_Login_Page, response);
+                    if (SystemPropertiesConfig.System_Login_Type.equals("SSO")) {
+                        redirectHome(ConfigConstants.Auth_Service, response);
+                    } else {
+                        //重定向到登录页(需要在static文件夹下建立此html文件)
+                        redirectHome(request.getContextPath() + SystemPropertiesConfig.System_Login_Page, response);
+                    }
                 }
             }
 
@@ -148,7 +152,7 @@ public class MyFilter implements Filter {
     private boolean isWhiteListUrl(String httpUrl, String[] whiteUrl) {
         if (whiteUrl != null) {
             for (String eu : whiteUrl) {
-                if (httpUrl.contains(eu.trim()) || httpUrl.equals("/") ||( httpUrl.contains(".css") || httpUrl.contains(".js") || httpUrl.contains(".png") || httpUrl.contains(".jpg"))) {
+                if (httpUrl.contains(eu.trim()) || httpUrl.equals("/") || (httpUrl.contains(".css") || httpUrl.contains(".js") || httpUrl.contains(".png") || httpUrl.contains(".jpg"))) {
                     return true;
                 }
             }
