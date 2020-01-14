@@ -23,4 +23,11 @@ public class ConfigConstants {
     * @Description: 单点登录服务
     **/
     public static String Auth_Service;
+
+    /**
+     * @Author: zhaobc
+     * @Date: 2020-01-14 11:03
+     * @Description: 附件地址
+     **/
+    public static String Attachment_Path;
 }
