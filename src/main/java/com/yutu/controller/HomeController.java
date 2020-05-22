@@ -1,14 +1,11 @@
 package com.yutu.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.yutu.entity.ConfigConstants;
 import com.yutu.entity.MsgPack;
 import com.yutu.entity.SessionUser;
-import com.yutu.entity.api.ApiMenuBusiness;
-import com.yutu.entity.api.ApiUser;
 import com.yutu.service.IHomeService;
-import com.yutu.util.RestClientUtils;
-import com.yutu.util.SessionUserManager;
+import com.yutu.utils.RestClientUtils;
+import com.yutu.utils.SessionUserManager;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

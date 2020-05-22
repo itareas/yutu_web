@@ -1,13 +1,9 @@
 package com.yutu.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.yutu.entity.ConfigConstants;
 import com.yutu.entity.MsgPack;
-import com.yutu.entity.SessionUser;
 import com.yutu.service.ILoginService;
-import com.yutu.util.RedisUtils;
-import com.yutu.util.RestClientUtils;
-import com.yutu.util.SessionUserManager;
+import com.yutu.utils.RedisUtils;
+import com.yutu.utils.SessionUserManager;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,10 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 /**
  * @ClassName:LoginController

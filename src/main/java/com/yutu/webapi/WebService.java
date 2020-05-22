@@ -3,8 +3,8 @@ package com.yutu.webapi;
 import com.alibaba.fastjson.JSON;
 import com.yutu.entity.MsgPack;
 import com.yutu.entity.table.TSysUser;
-import com.yutu.util.AESUtils;
-import com.yutu.util.RedisUtils;
+import com.yutu.utils.AESUtils;
+import com.yutu.utils.RedisUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
