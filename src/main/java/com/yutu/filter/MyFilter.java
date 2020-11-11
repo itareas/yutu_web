@@ -18,15 +18,17 @@ import javax.servlet.http.HttpSession;
 
 import com.yutu.configuration.SystemPropertiesConfig;
 import com.yutu.entity.MsgPack;
+import com.yutu.listener.MyServletContextListener;
 import com.yutu.utils.RedisUtils;
 import com.yutu.utils.RestClientUtils;
 import com.yutu.utils.SessionUserManager;
-import org.apache.log4j.Logger;
 import org.apache.commons.lang3.StringUtils;
 
 import com.yutu.entity.ConfigConstants;
 import com.yutu.entity.SessionUser;
 import com.yutu.utils.BlacklistUitls;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -46,7 +48,7 @@ public class MyFilter implements Filter {
 
     private long overtime;
 
-    Logger logger = Logger.getLogger(MyFilter.class);
+    private final Logger logger = LoggerFactory.getLogger(MyFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -136,7 +138,7 @@ public class MyFilter implements Filter {
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-            logger.error(e);
+            logger.error("异常：",e);
         }
     }
 

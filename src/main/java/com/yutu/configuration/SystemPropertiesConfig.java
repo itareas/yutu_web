@@ -31,6 +31,12 @@ public class SystemPropertiesConfig {
      * @Description:系统授权令牌名称
      **/
     public static String System_Auth_Token;
+    /**
+     * @Author: zhaobc
+     * @Date: 2019/4/17 16:15
+     * @Description: 是否启用拦截器
+     **/
+    public static String System_Interceptor_StartUp;
 
     /**
      * @Author: zhaobc
@@ -111,6 +117,11 @@ public class SystemPropertiesConfig {
     @Value("${System.Auth.Token}")
     public void setSystem_Auth_Token(String system_Auth_Token) {
         System_Auth_Token = system_Auth_Token;
+    }
+
+    @Value("${System.Interceptor.StartUp}")
+    public void setSystem_Interceptor_StartUp(String system_Interceptor_StartUp) {
+        System_Interceptor_StartUp = system_Interceptor_StartUp;
     }
 
     @Value("${System.Interceptor.OverTime}")

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yutu.mapper.mysql.TSysUserMapper">
+<mapper namespace="com.yutu.mapper.TSysUserMapper">
     <resultMap id="BaseResultMap" type="com.yutu.entity.table.TSysUser">
         <id column="uuid" jdbcType="VARCHAR" property="uuid"/>
         <result column="user_code" jdbcType="VARCHAR" property="userCode"/>

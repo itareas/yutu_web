@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yutu.mapper.mysql.TSysOrganizationMapper">
+<mapper namespace="com.yutu.mapper.TSysOrganizationMapper">
   <resultMap id="BaseResultMap" type="com.yutu.entity.table.TSysOrganization">
     <id column="uuid" jdbcType="VARCHAR" property="uuid" />
     <result column="org_parent" jdbcType="VARCHAR" property="orgParent" />

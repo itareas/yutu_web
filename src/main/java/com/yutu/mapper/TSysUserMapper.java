@@ -3,7 +3,7 @@
 * @Date 2019-12-16 22:26
 * @Description: 
 **/
-package com.yutu.mapper.mysql;
+package com.yutu.mapper;
 
 import com.yutu.entity.table.TSysUser;
 import org.apache.ibatis.annotations.Param;

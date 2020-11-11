@@ -1,4 +1,4 @@
-package com.yutu.mapper.mysql;
+package com.yutu.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

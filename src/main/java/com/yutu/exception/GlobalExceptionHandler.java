@@ -1,8 +1,10 @@
 package com.yutu.exception;
 
 import com.yutu.entity.MsgPack;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import com.yutu.entity.MsgStatus;
+import com.yutu.filter.MyFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
  **/
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-    private final Logger logger = LogManager.getLogger(GlobalExceptionHandler.class);
+    private final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     /**
      * @Author: zhaobc
@@ -35,7 +37,7 @@ public class GlobalExceptionHandler {
         this.logger.error(e.getMessage(), e);
         //业务处理
         MsgPack msgPack = new MsgPack();
-        msgPack.setStatus(500);
+        msgPack.setStatus(MsgStatus.FAIL.getCode());
         msgPack.setMsg("未知异常，请联系管理员");
 
         //使用HttpServletRequest中的header检测请求是否为ajax, 如果是ajax则返回json, 如果为非ajax则返回view(即ModelAndView)

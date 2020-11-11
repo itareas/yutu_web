@@ -2,6 +2,7 @@ package com.yutu.controller;
 
 import com.yutu.entity.ConfigConstants;
 import com.yutu.entity.MsgPack;
+import com.yutu.entity.MsgStatus;
 import com.yutu.entity.SessionUser;
 import com.yutu.service.IHomeService;
 import com.yutu.utils.RestClientUtils;
@@ -43,13 +44,13 @@ public class HomeController {
             map.put("appkey", ConfigConstants.Auth_AppKey);//应用key，由系统管理员发放
             msgPack = RestClientUtils.put(ConfigConstants.Auth_Service, "/webapi/menu/business", map, MsgPack.class);
             if (msgPack.getStatus() > 0) {
-                msgPack.setStatus(1);
+                msgPack.setStatus(MsgStatus.SUCCESS.getCode());
                 msgPack.setData(msgPack.getData().toString());
                 sessionUser.setMenuBus(msgPack.getData().toString());
                 msgPack = sessionUserManager.setSessionUser(sessionUser);
             }
         } else {
-            msgPack.setStatus(1);
+            msgPack.setStatus(MsgStatus.SUCCESS.getCode());
             msgPack.setData(sessionUser.getMenuBus());
         }
         return msgPack;

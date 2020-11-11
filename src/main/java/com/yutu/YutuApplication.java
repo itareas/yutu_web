@@ -7,7 +7,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 
 @SpringBootApplication
 @ServletComponentScan
-@MapperScan(basePackages ={"com.yutu.mapper.*"})
+@MapperScan(basePackages ={"com.yutu.mapper"})
 public class YutuApplication {
 
     public static void main(String[] args) {

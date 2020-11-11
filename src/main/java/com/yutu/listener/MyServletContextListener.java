@@ -3,9 +3,11 @@ package com.yutu.listener;
 import com.yutu.configuration.SystemPropertiesConfig;
 import com.yutu.entity.Blacklist;
 import com.yutu.entity.ConfigConstants;
+import com.yutu.service.impl.LoginServiceImpl;
 import com.yutu.utils.BlacklistUitls;
 import com.yutu.utils.StreamUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.method.HandlerMethod;
@@ -28,7 +30,7 @@ import java.util.*;
  **/
 @WebListener
 public class MyServletContextListener implements ServletContextListener {
-    private Logger logger = Logger.getLogger(MyServletContextListener.class);
+    private final Logger logger = LoggerFactory.getLogger(MyServletContextListener.class);
 
     /**
      * @Author: zhaobc
@@ -163,9 +165,10 @@ public class MyServletContextListener implements ServletContextListener {
             //获取业务配置文件区域
             ConfigConstants.Auth_AppKey = properties.getProperty("Auth_AppKey");
             ConfigConstants.Attachment_Path = properties.getProperty("Attachment_Path");
+            ConfigConstants.Auth_Service = properties.getProperty("Auth_Service");
 
         } catch (IOException e) {
-            logger.error(e);
+            logger.error("异常：",e);
             e.printStackTrace();
         }
     }

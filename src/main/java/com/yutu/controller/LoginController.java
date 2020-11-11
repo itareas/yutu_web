@@ -1,10 +1,13 @@
 package com.yutu.controller;
 
 import com.yutu.entity.MsgPack;
+import com.yutu.exception.GlobalExceptionHandler;
 import com.yutu.service.ILoginService;
 import com.yutu.utils.RedisUtils;
 import com.yutu.utils.SessionUserManager;
-import org.apache.log4j.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +26,7 @@ import java.io.IOException;
 @RestController
 @RequestMapping(value = "login")
 public class LoginController {
-    Logger logger = Logger.getLogger(LoginController.class);
+    private final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @Resource
     private ILoginService loginService;

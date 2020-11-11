@@ -4,8 +4,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.yutu.configuration.SystemPropertiesConfig;
 import com.yutu.entity.ConfigConstants;
 import com.yutu.entity.MsgPack;
+import com.yutu.entity.MsgStatus;
 import com.yutu.entity.SessionUser;
-import org.apache.log4j.Logger;
+import com.yutu.filter.MyFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -29,7 +32,7 @@ public class SessionUserManager {
     @Resource
     HttpServletRequest request;
 
-    Logger logger = Logger.getLogger(SessionUserManager.class);
+    private final Logger logger = LoggerFactory.getLogger(SessionUserManager.class);
 
     /**
      * @Author: zhaobc
@@ -106,18 +109,18 @@ public class SessionUserManager {
                         //存储到session中去 并设置超时时间
                         request.getSession().setAttribute(sessionUser.getSessionId(), sessionUser);
                         request.getSession().setMaxInactiveInterval(Integer.parseInt(SystemPropertiesConfig.System_Token_TimeOut));
-                        msgPack.setStatus(1);
+                        msgPack.setStatus(MsgStatus.SUCCESS.getCode());
                         break;
                     case "redis":
                         //存储到redis
                         redisUtils.set(session.getId(), sessionUser, Long.parseLong(SystemPropertiesConfig.System_Token_TimeOut));
-                        msgPack.setStatus(1);
+                        msgPack.setStatus(MsgStatus.SUCCESS.getCode());
                         break;
                     default:
                         //存储到session中去
                         request.getSession().setAttribute(sessionUser.getSessionId(), sessionUser);
                         request.getSession().setMaxInactiveInterval(Integer.parseInt(SystemPropertiesConfig.System_Token_TimeOut));
-                        msgPack.setStatus(1);
+                        msgPack.setStatus(MsgStatus.SUCCESS.getCode());
                         break;
                 }
 //            } else {
@@ -142,13 +145,13 @@ public class SessionUserManager {
                     //存储到session中去
                     request.getSession().setAttribute(sessionUser.getSessionId(), sessionUser);
                     request.getSession().setMaxInactiveInterval(Integer.parseInt(SystemPropertiesConfig.System_Token_TimeOut));
-                    msgPack.setStatus(1);
+                    msgPack.setStatus(MsgStatus.SUCCESS.getCode());
                     msgPack.setData(sessionUser);
                     break;
                 case "redis":
                     //存储到redis
                     redisUtils.expire(sessionUser.getSessionId(), Long.parseLong(SystemPropertiesConfig.System_Token_TimeOut));
-                    msgPack.setStatus(1);
+                    msgPack.setStatus(MsgStatus.SUCCESS.getCode());
                     msgPack.setData(sessionUser);
                     break;
             }

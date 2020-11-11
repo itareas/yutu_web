@@ -1,8 +1,9 @@
 package com.yutu.service.impl;
 
 import com.yutu.entity.MsgPack;
+import com.yutu.entity.MsgStatus;
 import com.yutu.entity.table.TSysUser;
-import com.yutu.mapper.mysql.TSysUserMapper;
+import com.yutu.mapper.TSysUserMapper;
 import com.yutu.service.IUserService;
 import org.springframework.stereotype.Service;
 
@@ -24,9 +25,9 @@ public class UserServiceImpl implements IUserService {
         MsgPack msgPack=new MsgPack();
         int userInsertCount= tSysUserMapper.insert(user);
         if(userInsertCount>0){
-            msgPack.setStatus(1);
+            msgPack.setStatus(MsgStatus.SUCCESS.getCode());
         }else {
-            msgPack.setStatus(0);
+            msgPack.setStatus(MsgStatus.FAIL.getCode());
         }
         return msgPack;
     }
@@ -36,9 +37,9 @@ public class UserServiceImpl implements IUserService {
         MsgPack msgPack=new MsgPack();
         int userUpdateCount= tSysUserMapper.updateByPrimaryKey(user);
         if(userUpdateCount>0){
-            msgPack.setStatus(1);
+            msgPack.setStatus(MsgStatus.SUCCESS.getCode());
         }else {
-            msgPack.setStatus(0);
+            msgPack.setStatus(MsgStatus.FAIL.getCode());
         }
         return msgPack;
     }
@@ -48,9 +49,9 @@ public class UserServiceImpl implements IUserService {
         MsgPack msgPack=new MsgPack();
         int userDelCount= tSysUserMapper.deleteByPrimaryKey(userId);
         if(userDelCount>0){
-            msgPack.setStatus(1);
+            msgPack.setStatus(MsgStatus.SUCCESS.getCode());
         }else {
-            msgPack.setStatus(0);
+            msgPack.setStatus(MsgStatus.FAIL.getCode());
         }
         return msgPack;
     }

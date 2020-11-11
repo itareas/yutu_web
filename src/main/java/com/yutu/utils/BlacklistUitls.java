@@ -3,8 +3,8 @@ package com.yutu.utils;
 import com.yutu.configuration.SystemPropertiesConfig;
 import com.yutu.entity.Blacklist;
 import com.yutu.entity.ClientVisiting;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  * @Description:
  **/
 public class BlacklistUitls {
-    private final Logger logger = LogManager.getLogger(BlacklistUitls.class);
+    private final Logger logger = LoggerFactory.getLogger(BlacklistUitls.class);
 
     /**
      * @Author: zhaobc

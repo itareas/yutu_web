@@ -1,7 +1,8 @@
 package com.yutu.service.impl;
 
 import com.yutu.entity.MsgPack;
-import com.yutu.mapper.mysql.IMySqlMapper;
+import com.yutu.entity.MsgStatus;
+import com.yutu.mapper.IMySqlMapper;
 import com.yutu.service.IHomeService;
 import org.springframework.stereotype.Service;
 
@@ -32,10 +33,10 @@ public class HomeServiceImpl implements IHomeService {
 
         //判断是否成功
         if (listMySql.size() > 0) {
-            msgPack.setStatus(1);
+            msgPack.setStatus(MsgStatus.SUCCESS.getCode());
             msgPack.setMsg("获取数据成功");
         } else {
-            msgPack.setStatus(0);
+            msgPack.setStatus(MsgStatus.FAIL.getCode());
             msgPack.setMsg("获取数据失败");
         }
 

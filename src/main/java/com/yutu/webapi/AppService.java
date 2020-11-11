@@ -1,6 +1,7 @@
 package com.yutu.webapi;
 
 import com.yutu.entity.MsgPack;
+import com.yutu.entity.MsgStatus;
 import com.yutu.utils.AESUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,10 +24,10 @@ public class AppService {
     public String getTest(String key, String value) {
         MsgPack msgPack = new MsgPack();
         if (key != null && value != null) {
-            msgPack.setStatus(1);
+            msgPack.setStatus(MsgStatus.SUCCESS.getCode());
             msgPack.setMsg("成功！");
         } else {
-            msgPack.setStatus(0);
+            msgPack.setStatus(MsgStatus.FAIL.getCode());
             msgPack.setMsg("key或者value为null");
         }
 

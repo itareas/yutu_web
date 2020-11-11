@@ -8,12 +8,23 @@ package com.yutu.entity;
 public class MsgPack<T> {
 
     /**
-    * @Author: zhaobc
-    * @Date: 2019-12-23 10:24
-    * @Description: 构造函数 设置默认值
-    **/
-    public MsgPack(){
-       this.setStatus(0);
+     * @Author: zhaobc
+     * @Date: 2020/6/17 22:34
+     * @Description: 构造函数
+     **/
+    public MsgPack(int status, String msg, T data) {
+        this.status = status;
+        this.msg = msg;
+        this.data = data;
+    }
+
+    /**
+     * @Author: zhaobc
+     * @Date: 2019-12-23 10:24
+     * @Description: 构造函数 设置默认值
+     **/
+    public MsgPack() {
+        this.setStatus(MsgStatus.FAIL.getCode());
     }
 
     /**
@@ -41,13 +52,10 @@ public class MsgPack<T> {
     }
 
     public void setStatus(int status) {
-        switch (status) {
-            case 0:
-                this.msg = "failure";
-                break;
-            case 1:
-                this.msg = "success";
-                break;
+        if (status == MsgStatus.FAIL.getCode()) {
+            this.msg = "failure";
+        } else if (status == MsgStatus.SUCCESS.getCode()) {
+            this.msg = "success";
         }
         this.status = status;
     }

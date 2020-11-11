@@ -2,6 +2,7 @@ package com.yutu.webapi;
 
 import com.alibaba.fastjson.JSON;
 import com.yutu.entity.MsgPack;
+import com.yutu.entity.MsgStatus;
 import com.yutu.entity.table.TSysUser;
 import com.yutu.utils.AESUtils;
 import com.yutu.utils.RedisUtils;
@@ -28,10 +29,10 @@ public class WebService {
     public String getTest(TSysUser user) {
         MsgPack<Map> msgPack = new MsgPack();
         if (user.getUserAccount() != null && user.getUserPwd() != null) {
-            msgPack.setStatus(1);
+            msgPack.setStatus(MsgStatus.SUCCESS.getCode());
             msgPack.setMsg("成功！");
         } else {
-            msgPack.setStatus(0);
+            msgPack.setStatus(MsgStatus.FAIL.getCode());
             msgPack.setMsg("key或者value为null");
         }
         Map<String, Object> map = new HashMap<String, Object>();

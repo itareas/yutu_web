@@ -5,14 +5,15 @@ import com.yutu.entity.ConfigConstants;
 import com.yutu.entity.MsgPack;
 import com.yutu.entity.SessionUser;
 import com.yutu.entity.api.ApiUser;
-import com.yutu.mapper.mysql.TSysUserMapper;
+import com.yutu.mapper.TSysUserMapper;
 import com.yutu.service.ILoginService;
 import com.yutu.utils.RestClientUtils;
 import com.yutu.utils.SessionUserManager;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.log4j.Logger;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -28,7 +29,7 @@ import java.util.*;
  **/
 @Service
 public class LoginServiceImpl implements ILoginService {
-    Logger logger = Logger.getLogger(ILoginService.class);
+    private final Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
 
     @Resource
     private TSysUserMapper sysUserMapper;

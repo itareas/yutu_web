@@ -1,10 +1,10 @@
 package com.yutu.service.impl;
 
 import com.yutu.entity.MsgPack;
+import com.yutu.entity.MsgStatus;
 import com.yutu.entity.table.TSysOrganization;
-import com.yutu.mapper.mysql.TSysOrganizationMapper;
+import com.yutu.mapper.TSysOrganizationMapper;
 import com.yutu.service.IOrganizationService;
-import com.yutu.service.IUserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -24,9 +24,9 @@ public class OrganizationServiceImpl implements IOrganizationService {
         MsgPack msgPack=new MsgPack();
         int orgInsertCount= tSysOrganizationMapper.insert(organization);
         if(orgInsertCount>0){
-            msgPack.setStatus(1);
+            msgPack.setStatus(MsgStatus.SUCCESS.getCode());
         }else {
-            msgPack.setStatus(0);
+            msgPack.setStatus(MsgStatus.FAIL.getCode());
         }
         return msgPack;
     }
@@ -36,9 +36,9 @@ public class OrganizationServiceImpl implements IOrganizationService {
         MsgPack msgPack=new MsgPack();
         int orgUpdateCount= tSysOrganizationMapper.updateByPrimaryKey(organization);
         if(orgUpdateCount>0){
-            msgPack.setStatus(1);
+            msgPack.setStatus(MsgStatus.SUCCESS.getCode());
         }else {
-            msgPack.setStatus(0);
+            msgPack.setStatus(MsgStatus.FAIL.getCode());
         }
         return msgPack;
     }
@@ -48,9 +48,9 @@ public class OrganizationServiceImpl implements IOrganizationService {
         MsgPack msgPack=new MsgPack();
         int orgDelCount= tSysOrganizationMapper.deleteByPrimaryKey(orgId);
         if(orgDelCount>0){
-            msgPack.setStatus(1);
+            msgPack.setStatus(MsgStatus.SUCCESS.getCode());
         }else {
-            msgPack.setStatus(0);
+            msgPack.setStatus(MsgStatus.FAIL.getCode());
         }
         return msgPack;
     }
