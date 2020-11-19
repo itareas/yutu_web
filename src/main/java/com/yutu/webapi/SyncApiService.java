@@ -21,7 +21,7 @@ import javax.ws.rs.core.MediaType;
  */
 @Component
 @Path("sync")
-public class SyncService {
+public class SyncApiService {
     @Resource
     private IUserService iUserService;
     @Resource

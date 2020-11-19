@@ -1,6 +1,6 @@
 package com.yutu.configuration;
 
-import com.yutu.webapi.SyncService;
+import com.yutu.webapi.SyncApiService;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.stereotype.Component;
@@ -21,6 +21,6 @@ public class JerseyConfig extends ResourceConfig {
         // 注册JSON转换器
         register(JacksonJsonProvider.class);
         //注册文接口模块
-        register(SyncService.class);
+        register(SyncApiService.class);
     }
 }

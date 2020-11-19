@@ -20,7 +20,7 @@ import java.util.Map;
  **/
 @RestController
 @RequestMapping("/api/web")
-public class WebService {
+public class WebApiService {
     @Resource
     private RedisUtils redisUtils;
 
