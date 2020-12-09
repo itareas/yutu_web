@@ -1,9 +1,8 @@
 package com.yutu.listener;
 
-import com.yutu.configuration.SystemPropertiesConfig;
+import com.yutu.configuration.SystemCoreConfig;
 import com.yutu.entity.Blacklist;
 import com.yutu.entity.ConfigConstants;
-import com.yutu.service.impl.LoginServiceImpl;
 import com.yutu.utils.BlacklistUitls;
 import com.yutu.utils.StreamUtils;
 import org.slf4j.Logger;
@@ -74,7 +73,7 @@ public class MyServletContextListener implements ServletContextListener {
         //业务配置文件加载
         runConfigConstants();
         //系统注入地址加载
-        SystemPropertiesConfig.System_Register_Request = getRegisterUrl();
+        SystemCoreConfig.System_Register_Request = getRegisterUrl();
     }
 
 

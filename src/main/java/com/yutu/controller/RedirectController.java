@@ -1,6 +1,6 @@
 package com.yutu.controller;
 
-import com.yutu.configuration.SystemPropertiesConfig;
+import com.yutu.configuration.SystemCoreConfig;
 import com.yutu.entity.MsgPack;
 import com.yutu.service.ILoginService;
 import org.springframework.stereotype.Controller;
@@ -40,7 +40,7 @@ public class RedirectController {
      **/
     @RequestMapping(value = "/loginSSO")
     public void loginSSO(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        switch (SystemPropertiesConfig.System_LoginStorage_Type) {
+        switch (SystemCoreConfig.System_LoginStorage_Type) {
             case "session":
                 String token = request.getParameter("token");
                 MsgPack msgPack = loginService.getLoginSSOVerification(token);

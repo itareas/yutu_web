@@ -16,9 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.yutu.configuration.SystemPropertiesConfig;
+import com.yutu.configuration.SystemCoreConfig;
 import com.yutu.entity.MsgPack;
-import com.yutu.listener.MyServletContextListener;
 import com.yutu.utils.RedisUtils;
 import com.yutu.utils.RestClientUtils;
 import com.yutu.utils.SessionUserManager;
@@ -62,7 +61,7 @@ public class MyFilter implements Filter {
             HttpServletResponse response = (HttpServletResponse) servletResponse;
             String security = request.getRemoteAddr() + "<yutu_frame>" + request.getHeader("User-Agent");
             //判断是否启动黑名单
-            if (SystemPropertiesConfig.System_Blacklist_StartUp.equals("true")) {
+            if (SystemCoreConfig.System_Blacklist_StartUp.equals("true")) {
                 //开始启动黑名单
                 BlacklistUitls black = new BlacklistUitls();
                 if (!black.judgeBlacklist(request)) {
@@ -78,13 +77,13 @@ public class MyFilter implements Filter {
             //判断是否有数据
             boolean isUserData = false;
             //判断是否为redis单点登录
-            if (SystemPropertiesConfig.System_LoginStorage_Type.equals("redis") && token != null && url.contains("loginSSO")) {
+            if (SystemCoreConfig.System_LoginStorage_Type.equals("redis") && token != null && url.contains("loginSSO")) {
                 //Redis版获取数据
                 sessionUser = (SessionUser) redisUtils.get(token);
                 //判断sessionUser是否有值
                 if (sessionUser != null) {
                     isUserData = true;
-                    request.getSession().setAttribute(SystemPropertiesConfig.System_Auth_Token, token);
+                    request.getSession().setAttribute(SystemCoreConfig.System_Auth_Token, token);
                 }
             } else {
                 //正常登录后  验证session过期时间
@@ -96,10 +95,10 @@ public class MyFilter implements Filter {
             if (isUserData && sessionUser.getUserSafety().equals(security)) {
                 if (url.equals("/")) {
                     //重定向到首页
-                    response.sendRedirect(SystemPropertiesConfig.System_Home_Page);
+                    response.sendRedirect(SystemCoreConfig.System_Home_Page);
                 }
                 //判断是否为单点登录，单点登录要要进行token验证
-                if (SystemPropertiesConfig.System_LoginStorage_Type.equals("session") && SystemPropertiesConfig.System_Login_Type.equals("SSO")) {
+                if (SystemCoreConfig.System_LoginStorage_Type.equals("session") && SystemCoreConfig.System_Login_Type.equals("SSO")) {
                     if (remoteVerify(session, sessionUser.getToken())) {
                         chain.doFilter(request, response);
                     } else {
@@ -111,9 +110,9 @@ public class MyFilter implements Filter {
                 }
             } else {
                 //判断是否需要白名单
-                if (StringUtils.isNotBlank(SystemPropertiesConfig.System_Filter_Path)) {
+                if (StringUtils.isNotBlank(SystemCoreConfig.System_Filter_Path)) {
                     //白名单判断
-                    String[] whiteUrl = SystemPropertiesConfig.System_Filter_Path.split(",");
+                    String[] whiteUrl = SystemCoreConfig.System_Filter_Path.split(",");
                     //如果是白名单里的，放行
                     if (isWhiteListUrl(url, whiteUrl)) {
                         chain.doFilter(request, response);
@@ -124,13 +123,13 @@ public class MyFilter implements Filter {
                 String requestType = request.getHeader("X-Requested-With");
                 //判断是否是ajax请求 是ajax请求，返回错误信息
                 if (requestType != null && "XMLHttpRequest".equals(requestType)) {
-                    response.getWriter().write(SystemPropertiesConfig.System_Filter_Path);
+                    response.getWriter().write(SystemCoreConfig.System_Filter_Path);
                 } else {
-                    if (SystemPropertiesConfig.System_Login_Type.equals("SSO")) {
+                    if (SystemCoreConfig.System_Login_Type.equals("SSO")) {
                         redirectHome(ConfigConstants.Auth_Service, response);
                     } else {
                         //重定向到登录页(需要在static文件夹下建立此html文件)
-                        redirectHome(request.getContextPath() + SystemPropertiesConfig.System_Login_Page, response);
+                        redirectHome(request.getContextPath() + SystemCoreConfig.System_Login_Page, response);
                     }
                 }
             }
@@ -168,7 +167,7 @@ public class MyFilter implements Filter {
      * @Description: 核心方法，通过接口验证token是否过期
      **/
     private boolean remoteVerify(HttpSession session, String token) throws Exception {
-        int interceptorOverTime = Integer.parseInt(SystemPropertiesConfig.System_Interceptor_OverTime);
+        int interceptorOverTime = Integer.parseInt(SystemCoreConfig.System_Interceptor_OverTime);
         //定时  在一定时间段 只能访问一次，防止请求过于频繁 时间段内直接返回true
         if (new Date().getTime() - overtime <= interceptorOverTime) {
             return true;
