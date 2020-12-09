@@ -197,8 +197,8 @@
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
     <select id="getLoginVerification" resultType="map">
-        SELECT U.`uuid`,U.`user_account`,U.`user_name`,U.`user_code`,U.`user_email`,
-	           U.`user_phone`,U.`user_sex`,U.`user_title`
+        SELECT U.uuid,U.user_account,U.user_name,U.user_code,U.user_email,
+	           U.user_phone,U.user_sex,U.user_title
         FROM t_sys_user U
         WHERE U.user_account=#{userName} and U.user_pwd=#{userPwd}
   </select>
